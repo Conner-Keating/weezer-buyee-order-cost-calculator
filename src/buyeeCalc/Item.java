@@ -3,37 +3,41 @@ package buyeeCalc;
 public class Item {
 	private String name;
 	private String type;
-	private double weightGrams;
+	private int weightGrams;
 	private double itemCostYen;
 	private double shippingCostYen;
+	private int want; // subjective value 1-10 (10 is a very desireable item)
 	public Item(String name, String type, double itemCostYen, double shippingCostYen) {
 		this.name = name;
 		this.type = type;
-		switch (this.type) {
-			case "CD":
-				this.weightGrams = 100.0;
-				break;
-			case "VINYL":
-				this.weightGrams = 250.0;
-				break;
-			case "CASSETTE":
-				this.weightGrams = 100.0;
-				break;
-			case "VHS":
-				this.weightGrams = 230.0;
-				break;
-			case "BOOK":
-				this.weightGrams = 280.0;
-				break;
-			case "MISC":
-				this.weightGrams = 200.0;
-				break;
-			default:
-				this.weightGrams = 0;
-				break;
-		}
+		this.weightGrams = switch (this.type) {
+			case "CD" -> 100;
+			case "VINYL" -> 250;
+			case "CASSETTE" -> 100;
+			case "VHS" -> 230;
+			case "BOOK" -> 280;
+			case "MISC" -> 200;
+			default -> 0;
+		};
 		this.itemCostYen = itemCostYen;
 		this.shippingCostYen = shippingCostYen;
+		want = 0;
+	}
+	public Item(String name, String type, double itemCostYen, double shippingCostYen, int want) {
+		this.name = name;
+		this.type = type;
+		this.weightGrams = switch (this.type) {
+			case "CD" -> 100;
+			case "VINYL" -> 250;
+			case "CASSETTE" -> 100;
+			case "VHS" -> 230;
+			case "BOOK" -> 280;
+			case "MISC" -> 200;
+			default -> 0;
+		};
+		this.itemCostYen = itemCostYen;
+		this.shippingCostYen = shippingCostYen;
+		this.want = want;
 	}
 	public String getName() {
 		return name;
@@ -47,10 +51,10 @@ public class Item {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public double getWeightGrams() {
+	public int getWeightGrams() {
 		return weightGrams;
 	}
-	public void setWeightGrams(double weightGrams) {
+	public void setWeightGrams(int weightGrams) {
 		this.weightGrams = weightGrams;
 	}
 	public double getItemCostYen() {
@@ -65,4 +69,10 @@ public class Item {
 	public void setShippingCostYen(double shippingCostYen) {
 		this.shippingCostYen = shippingCostYen;
 	}	
+	public int getWant() {
+		return want;
+	}
+	public void setWant(int want) {
+		this.want = want;
+	}
 }
